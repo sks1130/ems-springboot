@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: ems
+Implementation-Version: 1.1
+Built-By: sachin
+Implementation-Vendor-Id: com.ems
+Build-Jdk: 1.8.0_60
+Implementation-URL: http://projects.spring.io/spring-boot/ems/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
