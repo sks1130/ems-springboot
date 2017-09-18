@@ -1,11 +1,65 @@
-<div class="section">
-    <h3>{{headingTitle}}</h3>
-    <div>
-        <ul type="square">
-            <li>Luke</li>
-            <li>Darth</li>
-            <li>Anakin</li>
-            <li>Leia</li>
-        </ul>
-    </div>
-</div>
+<html>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body ng-controller="usersController">
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Sr</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in userList track by $index">
+				<td>{{user.id}}</td>
+				<td>{{user.Name}}</td>
+				<td>{{user.Age}}</td>
+				<td><div class="btn-group">
+						<button type="button" class="btn btn-default btn"
+							ng-click="edit($index);">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</button>
+						<button type="button" class="btn btn-default btn"
+							ng-click="del(user.id)">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
+					</div></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="">
+		<form class="form-horizontal">
+			<div class="form-group col-sm-4">
+				<label for="name" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="test" class="form-control" id="name"
+						placeholder="Name" ng-model="userObject.Name" />
+				</div>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="age" class="col-sm-2 control-label">Age</label>
+				<div class="col-sm-10">
+					<input type="test" class="form-control" id="age" placeholder="Age"
+						ng-model="userObject.Age" />
+				</div>
+			</div>
+			<input type="hidden" ng-model="$scope.objectIndex" class="ng-valid">
+			<div class="btn-group col-sm-2">
+				<button type="button" class="btn btn-primary btn" ng-click="save()">
+					<i class="glyphicon glyphicon glyphicon-ok-circle"></i>Save
+				</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
