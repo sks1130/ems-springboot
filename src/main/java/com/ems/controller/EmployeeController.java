@@ -1,5 +1,7 @@
 package com.ems.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,19 @@ public class EmployeeController {
 			logger.error("error:" + e.getMessage());
 			response.setStatus(Constants.ERROR);
 			response.setData(e.getMessage());
+		}
+		return response;
+	}
+	@RequestMapping(value = "/getAllEmployee", method = RequestMethod.GET)
+	public Response<List<Employee>> getAllEmployee() {
+		Response<List<Employee>> response = new Response<List<Employee>>();
+		try {
+			List<Employee> empList = employeeService.findAll(Employee.class);
+			response.setData(empList);
+			response.setStatus(Constants.SUCCESS);
+		} catch (Exception e) {
+			logger.error("error:" + e.getMessage());
+			response.setStatus(Constants.ERROR);
 		}
 		return response;
 	}
