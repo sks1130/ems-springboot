@@ -16,7 +16,7 @@
 				<th>Sr</th>
 				<th>Name</th>
 				<th>Age</th>
-				<th>Action</th>
+				<th>Address</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +24,7 @@
 				<td>{{user.id}}</td>
 				<td>{{user.Name}}</td>
 				<td>{{user.Age}}</td>
+				<td>{{user.Address}}</td>
 				<td><div class="btn-group">
 						<button type="button" class="btn btn-default btn"
 							ng-click="edit($index);">
@@ -51,6 +52,13 @@
 				<div class="col-sm-10">
 					<input type="test" class="form-control" id="age" placeholder="Age"
 						ng-model="userObject.Age" />
+				</div>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="address" class="col-sm-2 control-label">Address</label>
+				<div class="col-sm-10">
+					<input type="test" class="form-control" id="address"
+						placeholder="Address" ng-model="userObject.Address" />
 				</div>
 			</div>
 			<input type="hidden" ng-model="$scope.objectIndex" class="ng-valid">

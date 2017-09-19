@@ -24,7 +24,7 @@ public class EmployeeService {
 	@Autowired
 	MongoDAO mongoDAO;
 
-	public Response<String> addEmployee(Employee emp) {
+	public Response<String> addOrUpdateEmployee(Employee emp) {
 		Response<String> response = new Response<String>();
 		try {
 			Query query = new Query();
@@ -34,7 +34,11 @@ public class EmployeeService {
 				mongoDAO.insert(emp);
 				response.setData("Employee added: " + emp.toString());
 			} else {
-				response.setData("Employee already exist");
+				employee.setName(emp.getName());
+				employee.setAge(emp.getAge());
+				employee.setAddress(emp.getAddress());
+				mongoDAO.save(employee);
+				response.setData("Employee updated:" + employee.toString());
 			}
 			response.setStatus(Constants.SUCCESS);
 		} catch (Exception e) {
@@ -44,20 +48,6 @@ public class EmployeeService {
 		return response;
 	}
 
-	public String uddateEmployee(Employee emp) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("_id").is(emp.get_id()));
-		Employee employee = mongoDAO.findOne(query, Employee.class);
-		if (employee == null) {
-			return "Employee doesn't exist so " + addEmployee(emp);
-		} else {
-			employee.setName(emp.getName());
-			employee.setAddress(emp.getAddress());
-			employee.setAge(emp.getAge());
-			mongoDAO.save(employee);
-			return "Employee updated: " + employee.toString();
-		}
-	}
 
 	public String deleteEmployee(Employee emp) {
 		Query query = new Query();
@@ -72,6 +62,12 @@ public class EmployeeService {
 
 	public <T> List<T> findAll(Query query, Class<T> entityClass) {
 		return mongoDAO.find(query, entityClass);
+	}
+	public <T> T findOne(Query query, Class<T> entityClass) {
+		return mongoDAO.findOne(query, entityClass);
+	}
+	public <T> void delete(Query query , Class<T> entityClass)  {
+		mongoDAO.delete(query, entityClass);
 	}
 }
 
